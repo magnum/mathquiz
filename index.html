@@ -75,7 +75,7 @@
       const keyName = event.key;
       if (event.keyCode === 13) {
         console.log("enter pressed");
-        if(!document.getElementById('domanda').classList.contains("show")) document.getElementById("conferma").click();
+        if(document.getElementById('domanda').classList.contains("show")) document.getElementById("conferma").click();
       }
     }, false);
 
