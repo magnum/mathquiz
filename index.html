@@ -87,7 +87,6 @@
   </div>
 
   <script>
-
     let ok = ko = 0;
     let numeroOperazioni = 10;
     let numeroMassimoSommeSottrazioni = 100;
@@ -134,13 +133,14 @@
     const setup = () => {
       document.getElementById("inizia").classList.toggle('d-none');
       setTimeout(()=>{
-        numeroOperazioni = parseInt(window.prompt("quante operazioni vuoi?", numeroOperazioni));
-        numeroMassimoSommeSottrazioni = parseInt(window.prompt("per + e - numeri grandi fino a...", numeroMassimoSommeSottrazioni));
-        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore < di...", numeroMassimoMoltipliceEDivisioni));
-        secondiMaxPerOperazione = parseInt(window.prompt("tempo massimo per operazione in secondi?", secondiMaxPerOperazione));
+        numeroOperazioni = parseInt(window.prompt("quante operazioni vuoi?", numeroOperazioni)) || numeroOperazioni;
+        numeroMassimoSommeSottrazioni = parseInt(window.prompt("per + e - numeri grandi fino a...", numeroMassimoSommeSottrazioni)) || numeroMassimoSommeSottrazioni;
+        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore < di...", numeroMassimoMoltipliceEDivisioni)) || numeroMassimoMoltipliceEDivisioni;
+        secondiMaxPerOperazione = parseInt(window.prompt("tempo massimo per operazione in secondi?", secondiMaxPerOperazione)) || secondiMaxPerOperazione;
         inizia();
       }, 100)
     }
+    
 
     const inizia = () => {
       document.getElementById("inizia").classList.add('d-none');
@@ -148,6 +148,7 @@
       count = numeroOperazioni;
       faiDomanda();
     }
+
 
     const ricomincia = () => {
       ok = ko = 0;
@@ -165,13 +166,13 @@
         for (const element of document.getElementsByClassName("timer")){
           element.innerText = stingaTimer;
         }
-        //console.log(stingaTimer);
       }, 100)
       timeoutTimer = setTimeout(()=>{
         document.getElementById("conferma").click();
         clearInterval(timeoutInterval);
       }, secondiMaxPerOperazione*1000)
     }
+
 
     const calcolaRisultato = () => {
       operazione = `${numero1}${operatore}${numero2}`;
@@ -194,7 +195,6 @@
         if(numero2==0) numero2 =1;
       }
       calcolaRisultato();
-      //const risposta = window.prompt(`${operazione} = ?`)
       document.querySelector("#domanda .content").innerText = operazione;
       document.querySelector("#risposta").value = "";
       document.querySelector("#domandaLabel").innerText = `Domanda ${(numeroOperazioni-count)+1}`
@@ -209,6 +209,7 @@
       timerRisposta();
     }
 
+
     const leggiRisposta = () => {
       const risposta = document.querySelector("#risposta").value;
       mostraRisposta(operazione, risultato, risposta);
@@ -222,6 +223,7 @@
       clearTimeout(timeoutTimer);
       clearInterval(timeoutInterval);
     }
+
 
     const mostraRisposta = (operazione, risultato, risposta ) => {
       let classeRisposta = "bg-success";
@@ -238,6 +240,7 @@
       `;
       document.getElementById("operazioni").insertAdjacentHTML('beforeend', html);
     }
+
 
     const aggiornaStato = () => {
       const percentuale = (ok/numeroOperazioni*100).toFixed()
