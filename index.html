@@ -111,6 +111,11 @@
       setup();
     })
 
+    document.getElementById("ricomincia").addEventListener("click", (e) => {
+      e.preventDefault();
+      ricomincia();
+    })
+
     document.getElementById("conferma").addEventListener("click", (e) => {
       e.preventDefault();
       leggiRisposta();
@@ -138,8 +143,8 @@
     }
 
     const inizia = () => {
-      document.getElementById("inizia").classList.toggle('d-none');
-      document.getElementById("ricomincia").classList.toggle('d-none');
+      document.getElementById("inizia").classList.add('d-none');
+      document.getElementById("ricomincia").classList.remove('d-none');
       count = numeroOperazioni;
       faiDomanda();
     }
@@ -148,7 +153,7 @@
       ok = ko = 0;
       document.getElementById("inizia").classList.toggle('d-none');
       document.getElementById("ricomincia").classList.toggle('d-none');
-      document.getElementById("operazioni").replaceChildren();
+      document.getElementById("operazioni").replaceChildren("");
       inizia();
     }
 
@@ -231,7 +236,7 @@
           <div class="col-12">${operazione} = <span class="badge ${classeRisposta}">${risposta}</span></div>
         </div>
       `;
-      document.getElementById("operazioni").insertAdjacentHTML('afterend', html);
+      document.getElementById("operazioni").insertAdjacentHTML('beforeend', html);
     }
 
     const aggiornaStato = () => {
