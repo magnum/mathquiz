@@ -25,11 +25,19 @@
   <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
       <span class="text-muted">
-        <span class="fw-bold">mathquiz</span>
+        <span class="fw-bold">Mathquiz</span>
         - test veloce su operazioni matematiche 
         <span class="fw-bold">secondaria di primo grado</span>
-        sviluppato da 
-        <a href="mailto:antoniomolinari@me.com?subject=mathquiz">antoniomolinari@me.com</a>
+        <div class="license mb-2">
+          sviluppato da 
+          <a href="mailto:antoniomolinari@me.com?subject=mathquiz">antoniomolinari@me.com</a>
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> 
+          <!-- Quest'opera è distribuita con Licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.-->
+          <br/><a href="https://github.com/magnum/mathquiz" target="_blank">https://github.com/magnum/mathquiz</a>
+        </div>        
+        <div class="links mb-2">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#risorse">Altre risorse</a>
+        </div>
       </span>
     </div>
   </footer>
@@ -48,6 +56,27 @@
            <input type="number" class="form-control" id="risposta" placeholder="" >
           </div>
           <span class="timer"></span>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+          <button id="conferma" type="button" class="btn btn-primary">Conferma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="risorse" tabindex="-1" aria-labelledby="risorseLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="risorseLabel">Altre risorse</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li><a href="https://www.matika.in/it/#6" target="_blank">Matika</a></li>
+          </ul>
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
@@ -102,7 +131,7 @@
       setTimeout(()=>{
         numeroOperazioni = parseInt(window.prompt("quante operazioni vuoi?", numeroOperazioni));
         numeroMassimoSommeSottrazioni = parseInt(window.prompt("per + e - numeri grandi fino a...", numeroMassimoSommeSottrazioni));
-        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore grande fino a ...", numeroMassimoMoltipliceEDivisioni));
+        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore < di...", numeroMassimoMoltipliceEDivisioni));
         secondiMaxPerOperazione = parseInt(window.prompt("tempo massimo per operazione in secondi?", secondiMaxPerOperazione));
         inizia();
       }, 100)
