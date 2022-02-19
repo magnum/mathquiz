@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it" class="h-100">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,17 +9,30 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1 class="">mathquiz</h1>
-    <h2 id="stato" ></h2>
-    <div id="links" class="mb-2">
-      <a id="inizia" href="" class="btn btn-primary mr-2">Inizia</a>
-      <a id="ricomincia" href="" class="btn btn-secondary mr-2 d-none">Ricomincia</a>
-      <span id="timer"></span>
+<body class="d-flex flex-column h-100 "> 
+  <main class="flex-shrink-0">
+    <div class="container">
+      <h1 class="fw-bold">mathquiz</h1>
+      <h2 id="stato" ></h2>
+      <div id="links" class="mb-2">
+        <a id="inizia" href="" class="btn btn-primary mr-2">Inizia</a>
+        <a id="ricomincia" href="" class="btn btn-secondary mr-2 d-none">Ricomincia</a>
+        <span class="timer"></span>
+      </div>
+      <div id="operazioni"></div>
     </div>
-    <div id="operazioni"></div>
-  </div>
+  </main>
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">
+        <span class="fw-bold">mathquiz</span>
+        - test veloce su operazioni matematiche 
+        <span class="fw-bold">secondaria di primo grado</span>
+        sviluppato da 
+        <a href="mailto:antoniomolinari@me.com?subject=mathquiz">antoniomolinari@me.com</a>
+      </span>
+    </div>
+  </footer>
 
   <!-- Modal -->
   <div class="modal" id="domanda" tabindex="-1" aria-labelledby="domandaLabel" aria-hidden="true">
@@ -27,11 +40,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="domandaLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body">
           <div class="content fs-1 mb-4"></div> 
-          <input type="text" class="form-control" id="risposta" placeholder="">
+          <div class="mb-2">
+           <input type="number" class="form-control" id="risposta" placeholder="" >
+          </div>
+          <span class="timer"></span>
         </div>
         <div class="modal-footer">
           <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
@@ -44,9 +60,10 @@
   <script>
 
     let ok = ko = 0;
-    let numeroOperazioni;
-    let numeroMassimoSommeSottrazioni;
-    let secondiMaxPerOperazione;
+    let numeroOperazioni = 10;
+    let numeroMassimoSommeSottrazioni = 100;
+    let numeroMassimoMoltipliceEDivisioni = 3;
+    let secondiMaxPerOperazione = 10;
     let count;
     let domanda = new bootstrap.Modal(document.getElementById('domanda'), {});
     let risultato;
@@ -56,7 +73,7 @@
     let numero1;
     let numero2;
     let inizioTimer;
-    let intervalloTimer;
+    let timeoutInterval;
     let timeoutTimer;
     let domandaModal = new bootstrap.Modal(document.getElementById('domanda'), {});
 
@@ -79,15 +96,14 @@
       }
     }, false);
 
-    
 
     const setup = () => {
       document.getElementById("inizia").classList.toggle('d-none');
       setTimeout(()=>{
-        numeroOperazioni = parseInt(window.prompt("quante operazioni vuoi?", 10));
-        numeroMassimoSommeSottrazioni = parseInt(window.prompt("per + e - numeri grandi fino a...", 100));
-        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore grande fino a ...", 3));
-        secondiMaxPerOperazione = parseInt(window.prompt("tempo massimo per operazione in secondi?", 10));
+        numeroOperazioni = parseInt(window.prompt("quante operazioni vuoi?", numeroOperazioni));
+        numeroMassimoSommeSottrazioni = parseInt(window.prompt("per + e - numeri grandi fino a...", numeroMassimoSommeSottrazioni));
+        numeroMassimoMoltipliceEDivisioni = parseInt(window.prompt("per * e / secondo operatore grande fino a ...", numeroMassimoMoltipliceEDivisioni));
+        secondiMaxPerOperazione = parseInt(window.prompt("tempo massimo per operazione in secondi?", secondiMaxPerOperazione));
         inizia();
       }, 100)
     }
@@ -109,15 +125,17 @@
 
     const timerRisposta = () => {
       fineTimer =  moment().add(secondiMaxPerOperazione, 'seconds');
-      intervalloTimer = setInterval(()=>{
+      timeoutInterval = setInterval(()=>{
         const tempoRimanente = moment(fineTimer-moment()).format("mm:ss");
         const stingaTimer = `tempo rimanente ${tempoRimanente}s`;
-        document.getElementById("timer").innerText = stingaTimer;
+        for (const element of document.getElementsByClassName("timer")){
+          element.innerText = stingaTimer;
+        }
         //console.log(stingaTimer);
       }, 100)
       timeoutTimer = setTimeout(()=>{
         document.getElementById("conferma").click();
-        clearInterval(intervalloTimer);
+        clearInterval(timeoutInterval);
       }, secondiMaxPerOperazione*1000)
     }
 
@@ -167,7 +185,8 @@
       } else {
         domandaModal.hide();
       }
-      clearInterval(intervalloTimer);
+      clearTimeout(timeoutTimer);
+      clearInterval(timeoutInterval);
     }
 
     const mostraRisposta = (operazione, risultato, risposta ) => {
