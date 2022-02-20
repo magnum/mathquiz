@@ -1,6 +1,6 @@
 # mathquiz
 
-test veloce su operazioni matematiche secondaria di primo grado
+test veloce su operazioni matematiche
 autore antoniomolinari@me.com 
 https://github.com/magnum/mathquiz
 
