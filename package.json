@@ -1,0 +1,32 @@
+{
+  "name": "mathquiz",
+  "version": "0.0.1",
+  "description": "test su operazioni matematiche per alunni secondaria",
+  "scripts": {
+    "build": "parcel build index.html",
+    "dev": "parcel index.html --open",
+    "start": "npm run build && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "rm -rf dist && parcel build ./*.html --public-url https://magnum.github.io/mathquiz/",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/magnum/mathquiz.git"
+  },
+  "keywords": [
+    "math",
+    "quiz",
+    "school"
+  ],
+  "author": "antoniomolinari@me.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/magnum/mathquiz/issues"
+  },
+  "homepage": "https://github.com/magnum/mathquiz#readme",
+  "devDependencies": {
+    "gh-pages": "^3.2.3",
+    "parcel": "^2.3.2"
+  }
+}
