@@ -21,15 +21,18 @@ let domandaModal = new bootstrap.Modal(document.getElementById('domanda'), {
   keyboard: false
 });
 
+
 document.getElementById("inizia").addEventListener("click", (e) => {
   e.preventDefault();
   setup();
 })
 
+
 document.getElementById("ricomincia").addEventListener("click", (e) => {
   e.preventDefault();
   ricomincia();
 })
+
 
 document.getElementById("conferma").addEventListener("click", (e) => {
   e.preventDefault();
@@ -37,17 +40,12 @@ document.getElementById("conferma").addEventListener("click", (e) => {
 })
 
 
-document.getElementById("positivo").addEventListener("click", (e) => {
-  e.preventDefault();
-  let valore = document.getElementById("risposta").value.replace("-","");
-  document.getElementById("risposta").value = valore;
-})
-
-
 document.getElementById("negativo").addEventListener("click", (e) => {
   e.preventDefault();
-  let valore = document.getElementById("risposta").value.replace("-","");
-  document.getElementById("risposta").value = parseInt(`-${valore}`);
+  let valore = document.getElementById("risposta").value.toString();
+  valore = valore.indexOf("-") != -1 ? valore.replace("-","") : `-${valore}`
+  console.log(valore)
+  document.getElementById("risposta").value = parseInt(valore);
 })
 
 
