@@ -37,6 +37,20 @@ document.getElementById("conferma").addEventListener("click", (e) => {
 })
 
 
+document.getElementById("positivo").addEventListener("click", (e) => {
+  e.preventDefault();
+  let valore = document.getElementById("risposta").value.replace("-","");
+  document.getElementById("risposta").value = valore;
+})
+
+
+document.getElementById("negativo").addEventListener("click", (e) => {
+  e.preventDefault();
+  let valore = document.getElementById("risposta").value.replace("-","");
+  document.getElementById("risposta").value = parseInt(`-${valore}`);
+})
+
+
 document.addEventListener('keyup', (event) => {
   const keyName = event.key;
   if (event.keyCode === 13) {
@@ -116,7 +130,7 @@ const faiDomanda = () => {
   }
   calcolaRisultato();
   document.querySelector("#domanda .content").innerText = operazione;
-  document.querySelector("#risposta").value = "";
+  document.getElementById("risposta").value = "";
   document.querySelector("#domandaLabel").innerText = `Domanda ${(numeroOperazioni-count)+1}`
   if(!document.getElementById('domanda').classList.contains("show")) domandaModal.show();
   document.querySelector("#risposta").focus();

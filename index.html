@@ -17,8 +17,8 @@
       <h1 class="fw-bold">mathquiz</h1>
       <h2 id="stato" ></h2>
       <div id="links" class="mb-2">
-        <a id="inizia" href="" class="btn btn-primary mr-2">Inizia</a>
-        <a id="ricomincia" href="" class="btn btn-secondary mr-2 d-none">Ricomincia</a>
+        <a id="inizia" href="" class="btn btn-primary mr-2 w-100 btn-lg mb-2">Inizia</a>
+        <a id="ricomincia" href="" class="btn btn-secondary mr-2 d-none w-100 btn-lg mb-2">Ricomincia</a>
         <span class="timer"></span>
       </div>
       <div id="operazioni"></div>
@@ -28,18 +28,11 @@
     <div class="container">
       <span class="text-muted">
         <span class="fw-bold">mathquiz</span>
-        - test veloce su operazioni matematiche 
-        <span class="fw-bold">secondaria di primo grado</span>
-        <div class="license mb-2">
-          autore 
-          <a href="mailto:antoniomolinari@me.com?subject=mathquiz">antoniomolinari@me.com</a>
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> 
-          <!-- Quest'opera è distribuita con Licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.-->
-          <br/><a href="https://github.com/magnum/mathquiz" target="_blank">https://github.com/magnum/mathquiz</a>
-        </div>        
-        <div class="links mb-2">
-          <a href="#" data-bs-toggle="modal" data-bs-target="#risorse">Altre risorse</a>
-        </div>
+        - test veloce su operazioni matematiche per
+        <span class="fw-bold">secondaria primo grado</span>
+        <br/>
+        <a href="https://github.com/magnum/mathquiz" target="_blank">Github</a> -       
+        <a href="#" data-bs-toggle="modal" data-bs-target="#risorse">Altre risorse</a>
       </span>
     </div>
   </footer>
@@ -54,9 +47,18 @@
         </div>
         <div class="modal-body">
           <div class="content fs-1 mb-4"></div> 
-          <div class="mb-2">
-           <input type="number" class="form-control" id="risposta" placeholder="" >
-          </div>
+          
+          <form class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-8">
+              <input type="number" inputmode="decimal" class="form-control" id="risposta" placeholder="" >
+            </div>
+            <div class="col-2">
+              <button id="positivo" class="btn btn-secondary w-100" href="#">+</button>
+            </div>
+            <div class="col-2">
+              <button id="negativo" class="btn btn-secondary w-100" href="#">-</button>
+            </div>
+          </form>
           <span class="timer"></span>
         </div>
         <div class="modal-footer">
