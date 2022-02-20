@@ -2,13 +2,14 @@ let ok = 0
 let ko = 0;
 let numeroOperazioni = 10;
 let numeroMassimoSommeSottrazioni = 100;
-let numeroMassimoMoltipliceEDivisioni = 3;
+let numeroMassimoMoltipliceEDivisioni = 10;
 let secondiMaxPerOperazione = 10;
 let count;
 let domanda = new bootstrap.Modal(document.getElementById('domanda'), {});
 let risultato;
 let operatore;
 const operatori = ["+","-","*","/"];
+//const operatori = ["/"];
 let operazione;
 let numero1;
 let numero2;
@@ -101,12 +102,15 @@ const faiDomanda = () => {
   const operatore2Massimo = ["+","-"].indexOf(operatore) != -1 ? numeroMassimoSommeSottrazioni : numeroMassimoMoltipliceEDivisioni
   numero1 = Math.round(Math.random()*operatore1Massimo);
   numero2 = Math.round(Math.random()*operatore2Massimo);
-  if(operatore == "/" && numero1<numero2) [numero1, numero2] = [numero2, numero1]
+  //if(["+","-","/"].indexOf(operatore) != -1 && numero1<numero2) {
+  if(["/"].indexOf(operatore) != -1 && numero1<numero2) {
+    [numero1, numero2] = [numero2, numero1]
+  }
   if(operatore == "/") {
     calcolaRisultato();
     const resto = risultato % 1;
     if(resto > 0) {
-      numero2 = (numero1 % numero2)*numero2;
+      numero1 = (numero1 % numero2)*numero2;
     }
     if(numero2==0) numero2 =1;
   }
@@ -140,15 +144,17 @@ const leggiRisposta = () => {
 
 const mostraRisposta = (operazione, risultato, risposta ) => {
   let classeRisposta = "bg-success";
+  let suggerimenti = "";
   if(parseFloat(risposta) == risultato){
     ok ++;
   } else {
     ko ++;
     classeRisposta = "bg-danger";
+    suggerimenti = ` ${risultato}`
   }
   const html = `
     <div class="row mb-2">
-      <div class="col-12">${operazione} = <span class="badge ${classeRisposta}">${risposta}</span></div>
+      <div class="col-12 fs-4">${operazione} = <span class="badge ${classeRisposta}">${risposta}</span>${suggerimenti}</div>
     </div>
   `;
   document.getElementById("operazioni").insertAdjacentHTML('beforeend', html);
