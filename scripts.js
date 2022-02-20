@@ -1,4 +1,5 @@
-let ok = ko = 0;
+let ok = 0
+let ko = 0;
 let numeroOperazioni = 10;
 let numeroMassimoSommeSottrazioni = 100;
 let numeroMassimoMoltipliceEDivisioni = 3;
@@ -65,7 +66,8 @@ const inizia = () => {
 
 
 const ricomincia = () => {
-  ok = ko = 0;
+  ok = 0
+  ko = 0;
   document.getElementById("inizia").classList.toggle('d-none');
   document.getElementById("ricomincia").classList.toggle('d-none');
   document.getElementById("operazioni").replaceChildren("");
