@@ -75,7 +75,7 @@ const ricomincia = () => {
 }
 
 const timerRisposta = () => {
-  fineTimer =  moment().add(secondiMaxPerOperazione, 'seconds');
+  let fineTimer = moment().add(secondiMaxPerOperazione, 'seconds');
   timeoutInterval = setInterval(()=>{
     const tempoRimanente = moment(fineTimer-moment()).format("mm:ss");
     const stingaTimer = `tempo rimanente ${tempoRimanente}s`;
